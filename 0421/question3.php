@@ -22,7 +22,8 @@ if ($age >= 20 && $age < 30) {
 $x = 10;
 if ($x < 10) {
     echo "10より小さい";
-} elseif ($x == 10) {
+} elseif ($x === 10) {
+    # 基本同じを判定したい時
     echo "ちょうど10";
 } elseif ($x > 10) {
     echo "10より大きい";
@@ -39,3 +40,13 @@ if ($input) {
     echo "パスワードが間違っています";
 }
 ?>
+<br>
+<?php
+//5. input.html と question3.php を連携させて、変数 $loggedIn = "true" の場合に「ようこそ」それ以外に場合には「ログインしてください」と表示するコードを書いてください。
+$loggedIn = $_POST['login_status'];
+
+if ($loggedIn === "true") {
+    echo "ようこそ";
+} else {
+    echo "ログインしてください";
+}
