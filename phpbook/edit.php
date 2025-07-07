@@ -1,17 +1,17 @@
 
 <?php
 
-require_once './functions.php';
+include __DIR__ . '/inc/functions.php';
 
 if (empty($_GET['id'])) {
-    //idが空の時はエラー
-    echo 'IDが指定されていません。';
-    exit;
+  //idが空の時はエラー
+  echo 'IDが指定されていません。';
+  exit;
 }
 if (!preg_match('/\A\d{1,11}+\z/u', $_GET['id'])) {
-    //idが数字以外のときはエラー
-    echo 'IDが正しくありません。';
-    exit;
+  //idが数字以外のときはエラー
+  echo 'IDが正しくありません。';
+  exit;
 }
 
 $id = (int) $_GET['id'];
@@ -25,11 +25,11 @@ $stml->bindParam(':id', $id, PDO::PARAM_INT);
 $stml->execute();
 $result = $stml->fetch(PDO::FETCH_ASSOC);
 if (!$result) {
-    echo '指定したデータはありません。';
-    exit;
+  echo '指定したデータはありません。';
+  exit;
 }
 
-var_dump($result);
+// var_dump($result);
 
 $title = str2html($result['title']);
 $isbn = str2html($result['isbn']);
@@ -66,4 +66,6 @@ $html_form = <<<EOD
   <button type="submit">送信する</button>
 </form>
 EOD;
+include __DIR__ . '/inc/header.php';
 echo $html_form;
+include __DIR__ . '/inc/footer.php';
