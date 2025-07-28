@@ -1,0 +1,64 @@
+body {
+    margin-left: auto;
+    margin-right: auto;
+    font-family: sans-serif;
+    padding: 20px;
+    background-color: rgb(0, 0, 0);
+}
+
+h1 {
+    color: rgb(172, 2, 2);
+    font-family: "Yuji Syuku", serif;
+    text-align: center;
+    font-size: 60px;
+background-image: url(../image/hora.webp);
+padding: 20px 0 20px 0;
+}
+
+h2{
+    font-size: 30px;
+    color: rgb(172, 2, 2);
+    font-family: "Yuji Syuku", serif;
+}
+
+
+form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+button, input[type="submit"] {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: white;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 70%;
+margin-left: 250px;
+}
