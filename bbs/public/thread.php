@@ -52,6 +52,11 @@ $posts = get_posts_by_thread($pdo, (int)$thread_id);
 
     <!-- <hr /> -->
 
+    <script>
+        let triggerActive = false;
+        const summonWord = "どうぞおいでください";
+    </script>
+
     <?php if (empty($posts)): ?>
         <p>まだ投稿はありません。</p>
     <?php else: ?>
@@ -61,6 +66,11 @@ $posts = get_posts_by_thread($pdo, (int)$thread_id);
                 <p><?= nl2br(highlight_scary_words(htmlspecialchars($post['comment']))) ?></p>
                 <p><small><?= htmlspecialchars($post['created_at']) ?></small></p>
             </div>
+            <script>
+                if ("<?= htmlspecialchars($post['comment']) ?>".includes(summonWord)) {
+                    triggerActive = true;
+                }
+            </script>
         <?php endforeach; ?>
     <?php endif; ?>
 </body>
@@ -78,3 +88,53 @@ function highlight_scary_words(string $text): string
     return $text;
 }
 ?>
+
+<script>
+    let adding = false;
+
+    function addScaryComment() {
+        const scaryTexts = [
+            "ウシロヲミテ…",
+            "タスケテ…",
+            "オマエノナマエハシッテイル",
+            "アシオトガスグソコニ",
+            "フリカエルナ",
+            "ウシロニイル",
+            "ドアノムコウカラミテル"
+        ];
+
+        const randomText = scaryTexts[Math.floor(Math.random() * scaryTexts.length)];
+
+        const container = document.createElement("div");
+        container.style.color = "red";
+        container.style.margin = "30px 90px";
+        container.style.borderBottom = "1px solid red";
+        container.innerHTML = `
+      <p><strong>？？？</strong> さん</p>
+      <p>${randomText}</p>
+      <p><small>${new Date().toLocaleString()}</small></p>
+    `;
+
+        document.body.appendChild(container);
+    }
+
+    window.addEventListener("scroll", () => {
+        if (
+            triggerActive &&
+            window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+            !adding
+        ) {
+            adding = true;
+
+            let count = 0;
+            const interval = setInterval(() => {
+                addScaryComment();
+                count++;
+                if (count > 10) {
+                    clearInterval(interval);
+                    adding = false;
+                }
+            }, 5);
+        }
+    });
+</script>
