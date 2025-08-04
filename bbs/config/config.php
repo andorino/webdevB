@@ -1,6 +1,6 @@
 <?php
 $config = [
-    'dsn' => 'mysql:host=localhost;dbname=bbs_db;charset=utf8mb4',
-    'user' => 'bbs_user',
-    'pass' => '070707tuki' // 任意パスワードを記述。
+    'dsn' => 'mysql:host=mysql325.phy.lolipop.lan;dbname=LAA1605923-bbsdb;charset=utf8mb4',
+    'user' => 'LAA1605923',
+    'pass' => '070707tuki'
 ];

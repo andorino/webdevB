@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../functions.php';
 require_once __DIR__ . '/../app/models/thread.php';
@@ -14,19 +18,20 @@ if (!$thread_id) {
     exit;
 }
 
-$thread = get_thread_by_id($pdo, (int)$thread_id);
-if (!$thread) {
-    echo 'スレッドが見つかりません。';
-    exit;
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '名無し');
     $comment = trim($_POST['comment'] ?? '');
     if ($comment !== '') {
         insert_post($pdo, (int)$thread_id, $name, $comment);
+        header("Location: thread.php?id=" . urlencode($thread_id));
         exit;
     }
+}
+
+$thread = get_thread_by_id($pdo, (int)$thread_id);
+if (!$thread) {
+    echo 'スレッドが見つかりません。';
+    exit;
 }
 
 $posts = get_posts_by_thread($pdo, (int)$thread_id);
